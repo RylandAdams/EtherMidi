@@ -24,10 +24,9 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
 	try {
 		const prompt = req.body.prompt;
-
 		const response = await openai.createCompletion({
 			model: 'text-davinci-003',
-			prompt: `${prompt}`,
+			prompt: `give me a ${prompt} progression in notation`,
 			temperature: 0.1,
 			max_tokens: 200,
 			top_p: 1,
@@ -44,6 +43,6 @@ app.post('/', async (req, res) => {
 	}
 });
 
-app.listen(5000, () =>
-	console.log('Server is running on port http://localhost:5000')
+app.listen(4999, () =>
+	console.log('Server is running on port http://localhost:4999')
 );

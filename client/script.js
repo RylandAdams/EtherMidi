@@ -80,19 +80,15 @@ const handleSubmit = async (e) => {
 
 	//fetch data from the server --- bots response
 
-	const response = await fetch(
-		'https://openai-chat-assistant.onrender.com',
-		{
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				prompt: data.get('prompt'),
-			}),
+	const response = await fetch('http://localhost:4999', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
 		},
-		console.log(`${data} this is the data`)
-	);
+		body: JSON.stringify({
+			prompt: data.get('prompt'),
+		}),
+	});
 
 	clearInterval(loadInterval);
 	messageDiv.innerHTML = '';
@@ -121,6 +117,7 @@ const handleSubmit = async (e) => {
 
 		const write = new MidiWriter.Writer(track);
 		console.log(write.dataUri());
+		downloadFile(write.dataUri());
 
 		typeText(messageDiv, parsedData);
 	} else {
@@ -150,8 +147,10 @@ form.addEventListener('keyup', (e) => {
 // const write = new MidiWriter.Writer(track);
 // console.log(write.dataUri());
 
-function midiWrite(a) {
-	return `
-	
-	`;
-}
+const downloadFile = (file) => {
+	var a = document.createElement('a');
+	a.href = file;
+	a.download = 'download';
+
+	a.click();
+};
