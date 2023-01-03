@@ -65,7 +65,7 @@ function App() {
 
 	//Submit users built prompt to AI
 	const submitToAi = async (prompt) => {
-		const response = await fetch('http://localhost:4999', {
+		const response = await fetch('https://ethermidi.onrender.com', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
