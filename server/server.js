@@ -26,7 +26,7 @@ app.post('/', async (req, res) => {
 		const prompt = req.body.prompt;
 		const response = await openai.createCompletion({
 			model: 'text-davinci-003',
-			prompt: `give me a ${prompt} progression in notation`,
+			prompt: `give me a ${prompt} note progression in notation`,
 			temperature: 0.1,
 			max_tokens: 200,
 			top_p: 1,
