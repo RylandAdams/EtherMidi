@@ -9,6 +9,10 @@ function App() {
 
 	let prompt;
 
+	// TODOS
+	// BUILD LOGIC FOR MAJOR OR MINOR KEY
+	// BUILD LOGIN FOR FEELS LIKE ABILITY
+
 	//Auto download of MIDI file
 	const downloadFile = (file) => {
 		var a = document.createElement('a');
