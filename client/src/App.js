@@ -12,13 +12,13 @@ function App() {
 	// TODOS
 	// BUILD LOGIC FOR MAJOR OR MINOR KEY
 	// BUILD LOGIN FOR FEELS LIKE ABILITY
+	// COMPOSER TYPE
 
 	//Auto download of MIDI file
 	const downloadFile = (file) => {
 		var a = document.createElement('a');
 		a.href = file;
 		a.download = 'download';
-
 		a.click();
 	};
 
@@ -39,6 +39,7 @@ function App() {
 
 	//Adds numbers to non numbered notes
 	let numNote;
+	q;
 	const addNumber = (note) => {
 		numNote = note.concat('2');
 	};
