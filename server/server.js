@@ -26,7 +26,8 @@ app.post('/', async (req, res) => {
 		const prompt = req.body.prompt;
 		const response = await openai.createCompletion({
 			model: 'text-davinci-003',
-			prompt: `give me a ${prompt} note progression in notation`,
+			// prompt: `give me a ${prompt} note progression in notation`,
+			prompt: `You are a Modern composer. Give me a Melody in C Major with octave indicators that feels like Summer.`,
 			temperature: 0.1,
 			max_tokens: 200,
 			top_p: 1,
@@ -43,6 +44,6 @@ app.post('/', async (req, res) => {
 	}
 });
 
-app.listen(4999, () =>
-	console.log('Server is running on port http://localhost:4999')
+app.listen(4998, () =>
+	console.log('Server is running on port http://localhost:4998')
 );

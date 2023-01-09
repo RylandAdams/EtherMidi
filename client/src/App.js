@@ -6,6 +6,10 @@ import MidiWriter from 'midi-writer-js';
 function App() {
 	const [instrument, setInstrument] = useState('Bass');
 	const [key, setKey] = useState('Random');
+	const [progressionType, setProgressionType] = useState('');
+	const [composer, setComposer] = useState('');
+	const [mode, setMode] = useState('');
+	const [feelsLike, setFeelsLike] = useState('');
 
 	let prompt;
 
@@ -32,20 +36,41 @@ function App() {
 		setInstrument(e.target.value);
 	};
 
+	//Grab mode selected from dropdown
+	const modeChange = (e) => {
+		setMode(e.target.value);
+	};
+
+	//Grab composer selected from dropdown
+	const composerChange = (e) => {
+		setComposer(e.target.value);
+	};
+
+	//Grab progression selected from dropdown
+	const progressionChange = (e) => {
+		setProgressionType(e.target.value);
+	};
+
+	//Grab progression selected from dropdown
+	const feelsLikeChange = (e) => {
+		console.log(e.target.value);
+		setFeelsLike(e.target.value);
+	};
+
 	//Check for if notes have numbers
 	const hasNumber = (myString) => {
 		return /\d/.test(myString);
 	};
 
-	//Adds numbers to non numbered notes
-	let numNote;
-	q;
-	const addNumber = (note) => {
-		numNote = note.concat('2');
-	};
-
 	//Build prompt based of input
 	const buildPrompt = () => {
+		let prompt;
+
+		//COMPOSER LINE
+		if (!composer === '') {
+			prompt = `You are a ${composer} composer. `;
+		}
+
 		if (key === 'Random') {
 			return `${instrument} note progression in a ${key} key in notation`;
 		} else {
@@ -70,7 +95,7 @@ function App() {
 
 	//Submit users built prompt to AI
 	const submitToAi = async (prompt) => {
-		const response = await fetch('https://ethermidi.onrender.com', {
+		const response = await fetch('http://localhost:4998', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -198,6 +223,64 @@ function App() {
 							<option value='Piano'>Piano</option>
 							<option value='Guitar'>Guitar</option>
 						</select>
+						<br />
+						<label>Mode:</label>
+						<select
+							value={mode}
+							onChange={modeChange}
+							className='Mode'
+						>
+							<option
+								selected
+								value=''
+							>
+								???
+							</option>
+							<option value='Major'>Major</option>
+							<option value='Minor'>Minor</option>
+						</select>
+						<br />
+						<label>Progression:</label>
+						<select
+							value={progressionType}
+							onChange={progressionChange}
+							className='progressionType'
+						>
+							<option
+								selected
+								value=''
+							>
+								???
+							</option>
+							<option value='Chord'>Chord</option>
+							<option value='Melody'>Melody</option>
+						</select>
+						<br />
+						<label>Composer:</label>
+						<select
+							value={composer}
+							onChange={composerChange}
+							className='composer'
+						>
+							<option
+								selected
+								value=''
+							>
+								???
+							</option>
+							<option value='Modern'>Modern</option>
+							<option value='R&B'>R&B</option>
+							<option value='Trap'>Trap</option>
+							<option value='Rock'>Rock</option>
+						</select>
+						<br />
+						<label>Feels Like:</label>
+						<input
+							type='text'
+							onChange={feelsLikeChange}
+							className='feelsLike'
+							placeholder='Summer'
+						></input>
 						<br />
 						<input
 							type='submit'

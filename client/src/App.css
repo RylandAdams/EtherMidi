@@ -23,6 +23,10 @@ label {
 	background-color: rgb(245, 245, 247);
 }
 
+select {
+	margin: 1%;
+}
+
 .Plugin::after {
 	content: '';
 	display: block;
