@@ -27,6 +27,10 @@ select {
 	margin: 1%;
 }
 
+.submitBtn {
+	margin: 1%;
+}
+
 .Plugin::after {
 	content: '';
 	display: block;

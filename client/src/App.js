@@ -13,11 +13,6 @@ function App() {
 
 	let prompt;
 
-	// TODOS
-	// BUILD LOGIC FOR MAJOR OR MINOR KEY
-	// BUILD LOGIN FOR FEELS LIKE ABILITY
-	// COMPOSER TYPE
-
 	//Auto download of MIDI file
 	const downloadFile = (file) => {
 		var a = document.createElement('a');
@@ -44,6 +39,7 @@ function App() {
 	//Grab composer selected from dropdown
 	const composerChange = (e) => {
 		setComposer(e.target.value);
+		console.log(composer);
 	};
 
 	//Grab progression selected from dropdown
@@ -53,7 +49,6 @@ function App() {
 
 	//Grab progression selected from dropdown
 	const feelsLikeChange = (e) => {
-		console.log(e.target.value);
 		setFeelsLike(e.target.value);
 	};
 
@@ -62,20 +57,50 @@ function App() {
 		return /\d/.test(myString);
 	};
 
-	//Build prompt based of input
+	//Build prompt based off input
 	const buildPrompt = () => {
-		let prompt;
+		let prompt = '';
 
 		//COMPOSER LINE
-		if (!composer === '') {
+		if (composer !== '') {
 			prompt = `You are a ${composer} composer. `;
 		}
 
-		if (key === 'Random') {
-			return `${instrument} note progression in a ${key} key in notation`;
-		} else {
-			return `${instrument} note progression in the key of ${key} in notation`;
+		//PROGRESSIONTYPE LINE
+		if (progressionType !== '') {
+			prompt += `Give me ${progressionType}s `;
 		}
+
+		//INSTRUMENT LINE
+		prompt += `on ${instrument} `;
+
+		// KEY LINE
+		if (key !== '') {
+			if (key === 'Random') {
+				prompt += `in a ${key} `;
+			} else {
+				prompt += `in ${key} `;
+			}
+		}
+
+		// MODE LINE
+		if (mode !== '') {
+			prompt += `${mode} `;
+		}
+
+		// FEELSLIKE LINE
+		if (feelsLike !== '') {
+			prompt += `that feels like ${feelsLike}`;
+		}
+
+		// if (key === 'Random') {
+		// 	prompt += `${instrument} note progression in a ${key} key in notation`;
+		// } else {
+		// 	prompt += `${instrument} note progression in the key of ${key} in notation`;
+		// }
+
+		console.log(prompt);
+		return prompt;
 	};
 
 	//Build midi
@@ -173,7 +198,6 @@ function App() {
 		e.preventDefault();
 
 		prompt = buildPrompt();
-		console.log(prompt);
 		submitToAi(prompt);
 	};
 
@@ -283,6 +307,7 @@ function App() {
 						></input>
 						<br />
 						<input
+							className='submitBtn'
 							type='submit'
 							value='Submit'
 						/>
