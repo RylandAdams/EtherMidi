@@ -141,8 +141,6 @@ function App() {
 			const data = await response.json();
 			const botData = data.bot.trim();
 
-			console.log(botData);
-
 			//Remove all the extra chars
 			if (botData.includes('-')) {
 				console.log('has -');
